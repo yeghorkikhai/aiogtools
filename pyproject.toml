@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aiotools"
-version = "0.0.1"
+version = "0.0.2"
 description = "Aiotools kit for aiogram framework"
 authors = ["yeghorkikhai <yeghorkikhai@gmail.com>"]
 readme = "README.md"
