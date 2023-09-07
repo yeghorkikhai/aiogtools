@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "aiotools"
+version = "0.0.1"
+description = "Aiotools kit for aiogram framework"
+authors = ["yeghorkikhai <yeghorkikhai@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiotools-editor = {git = "https://github.com/yeghorkikhai/aiotools-editor.git"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
