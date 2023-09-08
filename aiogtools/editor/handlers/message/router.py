@@ -23,7 +23,7 @@ router = Router()
 router.message.register(
     text,
     F.text,
-    StateFilter(PostState.message & PostState.edit_text)
+    StateFilter(PostState.message, PostState.edit_text)
 )
 router.message.register(
     photo,
