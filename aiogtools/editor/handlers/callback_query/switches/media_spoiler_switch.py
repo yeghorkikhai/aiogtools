@@ -2,7 +2,7 @@ from aiogram import Bot
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
 
-from aiotools_editor.utils.send_panel import send_panel
+from ....utils.send_panel import send_panel
 
 
 async def media_spoiler_switch(
