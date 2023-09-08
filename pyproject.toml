@@ -1,13 +1,12 @@
 [tool.poetry]
 name = "aiogtools"
-version = "0.0.2"
-description = "Aiotools kit for aiogram framework"
+version = "0.1.0"
+description = "Aiotools kit for aiogram:^3.0.0 framework"
 authors = ["yeghorkikhai <yeghorkikhai@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-aiotools-editor = {git = "https://github.com/yeghorkikhai/aiotools-editor.git"}
 
 
 [build-system]
