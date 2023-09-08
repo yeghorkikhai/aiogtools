@@ -16,7 +16,7 @@ async def text(
     chat_id = message.chat.id
     state_name = await state.get_state()
 
-    if isinstance(state_name, PostState.message):
+    if isinstance(type(state_name), PostState.message):
         await state.update_data({
             "text": message.html_text,
             "markup": message.reply_markup.model_dump_json() if message.reply_markup else None,
@@ -36,7 +36,7 @@ async def text(
             state=state,
             bot=bot
         )
-    elif isinstance(state_name, PostState.edit_text):
+    elif isinstance(type(state_name), PostState.edit_text):
 
         state_data = await state.get_data()
 
