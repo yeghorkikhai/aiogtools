@@ -6,4 +6,8 @@ async def sticker(
         message: Message,
         state: FSMContext
 ):
-    pass
+    await message.delete()
+
+    await message.answer(
+        text='Бот не працює зі стікерами надішліть пост'
+    )

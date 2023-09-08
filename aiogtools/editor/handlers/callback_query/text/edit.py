@@ -13,9 +13,7 @@ async def edit_text(
 
     await state.set_state(PostState.edit_text)
 
-    has_text = True if (
-            state_data.get('text') is not None or state_data.get('caption') is not None
-    ) else False
+    has_text = bool(state_data.get("text")) or bool(state_data.get("caption"))
 
     await callback_query.message.edit_text(
         text='d',

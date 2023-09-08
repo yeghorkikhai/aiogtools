@@ -36,8 +36,9 @@ def edit_media_keyboard(
         builder.row(
             InlineKeyboardButton(
                 text=f"Видалити медіа",
-                callback_data=BaseCallbackData(
-                    action='delete_media'
+                callback_data=MediaCallbackData(
+                    action='delete',
+                    position=position
                 ).pack()
             )
         )

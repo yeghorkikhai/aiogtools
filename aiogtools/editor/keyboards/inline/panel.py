@@ -20,7 +20,7 @@ def panel_keyboard(
         has_media: bool,
         media_position: MediaPosition,
         has_markup: bool,
-        has_spoiler: bool,
+        has_media_spoiler: bool,
         disable_web_page_preview: bool,
         disable_notifications: bool,
         back_callback_data: str,
@@ -87,7 +87,7 @@ def panel_keyboard(
     if allowed_methods is None or AllowedMethods.SPOILER_SWITCH in allowed_methods:
         builder.row(
             InlineKeyboardButton(
-                text=f"Спойлер {'✅' if not has_spoiler else '☑️'}",
+                text=f"Спойлер {'✅' if has_media_spoiler else '☑️'}",
                 callback_data=BaseCallbackData(
                     action='media_spoiler_switch'
                 ).pack()

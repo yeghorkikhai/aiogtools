@@ -2,7 +2,7 @@ from aiogram import Bot
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
 
-from ....utils.send_panel import send_panel
+from ....utils.refresh import refresh
 
 
 async def media_spoiler_switch(
@@ -13,17 +13,13 @@ async def media_spoiler_switch(
     state_data = await state.get_data()
 
     await state.update_data({
-        "has_spoiler": not state_data.get('has_spoiler')
+        "has_media_spoiler": not state_data.get('has_media_spoiler')
     })
-
-    await callback_query.message.delete()
 
     await callback_query.answer(
         text=f"Спойлер {'увімкнено' if not state_data.get('has_spoiler') else 'вимкнено'}"
     )
 
-    await send_panel(
-        chat_id=callback_query.message.chat.id,
-        state=state,
-        bot=bot
-    )
+    chat_id = callback_query.message.chat.id
+
+    await refresh(chat_id, state, bot)

@@ -12,7 +12,8 @@ from .voice import voice
 from .document import document
 from .sticker import sticker
 from .poll import poll
-from .album import album
+from .album import get_album
+from .replace_links import replace_links
 
 # States
 from ...states import PostState
@@ -28,16 +29,19 @@ router.message.register(
 router.message.register(
     photo,
     F.photo,
+    ~F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
     animation,
     F.animation,
+    ~F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
     video,
     F.video,
+    ~F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
@@ -48,6 +52,7 @@ router.message.register(
 router.message.register(
     audio,
     F.audio,
+    ~F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
@@ -58,6 +63,7 @@ router.message.register(
 router.message.register(
     document,
     F.document,
+    ~F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
@@ -71,7 +77,12 @@ router.message.register(
     StateFilter(PostState.message)
 )
 router.message.register(
-    album,
+    get_album,
     F.media_group_id,
     StateFilter(PostState.message)
+)
+router.message.register(
+    replace_links,
+    F.text,
+    StateFilter(PostState.replace_links)
 )

@@ -1,6 +1,7 @@
 from aiogram import Bot
 from aiogram.fsm.context import FSMContext
 
+from ..states import PostState
 from ..keyboards.inline import panel_keyboard
 
 
@@ -20,7 +21,7 @@ async def send_panel(
             has_media=not (state_data.get("text")),
             media_position=state_data.get("media_position"),
             has_text=bool(state_data.get("text")) or bool(state_data.get("caption")),
-            has_spoiler=state_data.get("has_spoiler"),
+            has_media_spoiler=state_data.get("has_media_spoiler"),
             disable_web_page_preview=state_data.get("disable_web_page_preview"),
             disable_notifications=state_data.get("disable_notifications"),
             back_title=state_data.get("back_title"),
@@ -34,3 +35,5 @@ async def send_panel(
     await state.update_data({
         "editor_message_id": message.message_id
     })
+
+    await state.set_state(PostState.edit)

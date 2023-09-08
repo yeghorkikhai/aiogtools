@@ -2,10 +2,10 @@ from aiogram import Bot
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
-from ...utils.send_message import send_message
-from ...utils.send_panel import send_panel
 from ...enums import MediaPosition
 from ...states import PostState
+from ...utils.send_message import send_message
+from ...utils.send_panel import send_panel
 
 
 async def text(
@@ -25,17 +25,6 @@ async def text(
             "media_position": MediaPosition.UP
         })
 
-        await send_message(
-            chat_id=chat_id,
-            state=state,
-            bot=bot
-        )
-
-        await send_panel(
-            chat_id=chat_id,
-            state=state,
-            bot=bot
-        )
     elif state_name == "PostState:edit_text":
 
         state_data = await state.get_data()
@@ -49,16 +38,16 @@ async def text(
                 "caption": message.html_text
             })
 
-        await send_message(
-            chat_id=chat_id,
-            state=state,
-            bot=bot
-        )
+    await send_message(
+        chat_id=chat_id,
+        state=state,
+        bot=bot
+    )
 
-        await send_panel(
-            chat_id=chat_id,
-            state=state,
-            bot=bot
-        )
+    await send_panel(
+        chat_id=chat_id,
+        state=state,
+        bot=bot
+    )
 
     await state.set_state(PostState.edit)
