@@ -164,7 +164,7 @@ frozenlist = ">=1.1.0"
 
 [[package]]
 name = "aiotools-editor"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 optional = false
 python-versions = "^3.11"
@@ -178,7 +178,7 @@ aiogram = "^3.0.0"
 type = "git"
 url = "https://github.com/yeghorkikhai/aiotools-editor.git"
 reference = "HEAD"
-resolved_reference = "bc05e17190239560dee9b9b36beda82387c483f8"
+resolved_reference = "bcc24fe2c540eca75bee91eaa55ffe465e6bc8c2"
 
 [[package]]
 name = "annotated-types"
