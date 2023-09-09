@@ -14,6 +14,7 @@ async def create_post(
         back_title: str | None = None,
         then_title: str | None = None,
         allowed_methods: list[AllowedMethods] | None = None,
+        **kwargs
 ):
     await state.set_state(PostState.message)
 
@@ -22,7 +23,8 @@ async def create_post(
         "then_title": then_title,
         "back_callback_data": back_callback_data,
         "then_callback_data": then_callback_data,
-        "allowed_methods": allowed_methods
+        "allowed_methods": allowed_methods,
+        **kwargs
     })
 
 
@@ -48,7 +50,8 @@ async def edit_post(
         has_media_spoiler: bool = False,
         back_title: str | None = None,
         then_title: str | None = None,
-        allowed_methods: list[AllowedMethods] | None = None
+        allowed_methods: list[AllowedMethods] | None = None,
+        **kwargs
 ):
     await state.set_state(PostState.edit)
 
@@ -72,7 +75,8 @@ async def edit_post(
         "then_title": then_title,
         "back_callback_data": back_callback_data,
         "then_callback_data": then_callback_data,
-        "allowed_methods": allowed_methods
+        "allowed_methods": allowed_methods,
+        **kwargs
     })
 
     await send_message(
