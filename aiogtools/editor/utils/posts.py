@@ -75,7 +75,7 @@ async def edit_post(
         "allowed_methods": allowed_methods
     }
 
-    await state.update_data(**data)
+    await state.update_data({**data})
 
     await send_message(
         chat_id=chat_id,
