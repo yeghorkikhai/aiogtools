@@ -89,8 +89,6 @@ async def build_media(
     data = await state.get_data()
     album: list[tuple[str, str]] = data.get("album")
 
-    print("album ", album)
-
     for index, item in enumerate(album):
         media_type, media_id = item
         match media_type:

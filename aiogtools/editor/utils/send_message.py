@@ -1,5 +1,6 @@
 from aiogram import Bot
 from aiogram.fsm.context import FSMContext
+from aiogram.enums import ParseMode
 
 from .media import build_media
 
@@ -18,7 +19,8 @@ async def send_message(
             chat_id=chat_id,
             text=state_data.get("text"),
             disable_notification=state_data.get("disable_notification"),
-            disable_web_page_preview=state_data.get("disable_web_page_preview")
+            disable_web_page_preview=state_data.get("disable_web_page_preview"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("photo") is not None:
         message = await bot.send_photo(
@@ -26,7 +28,8 @@ async def send_message(
             photo=state_data.get("photo"),
             caption=state_data.get("caption"),
             disable_notification=state_data.get("disable_notification"),
-            has_spoiler=state_data.get("has_media_spoiler")
+            has_spoiler=state_data.get("has_media_spoiler"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("animation") is not None:
         message = await bot.send_animation(
@@ -34,7 +37,8 @@ async def send_message(
             animation=state_data.get("animation"),
             caption=state_data.get("caption"),
             disable_notification=state_data.get("disable_notification"),
-            has_spoiler=state_data.get("has_media_spoiler")
+            has_spoiler=state_data.get("has_media_spoiler"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("video") is not None:
         message = await bot.send_video(
@@ -42,7 +46,8 @@ async def send_message(
             video=state_data.get("video"),
             caption=state_data.get("caption"),
             disable_notification=state_data.get("disable_notification"),
-            has_spoiler=state_data.get("has_media_spoiler")
+            has_spoiler=state_data.get("has_media_spoiler"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("video_note") is not None:
         message = await bot.send_video_note(
@@ -55,7 +60,8 @@ async def send_message(
             chat_id=chat_id,
             audio=state_data.get("audio"),
             caption=state_data.get("caption"),
-            disable_notification=state_data.get("disable_notification")
+            disable_notification=state_data.get("disable_notification"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("voice") is not None:
         message = await bot.send_voice(
@@ -67,7 +73,9 @@ async def send_message(
         message = await bot.send_document(
             chat_id=chat_id,
             document=state_data.get("document"),
-            disable_notification=state_data.get("disable_notification")
+            caption=state_data.get("caption"),
+            disable_notification=state_data.get("disable_notification"),
+            parse_mode=ParseMode.HTML
         )
     elif state_data.get("album") is not None:
         media = await build_media(state)
