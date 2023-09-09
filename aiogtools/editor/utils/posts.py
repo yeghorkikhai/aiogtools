@@ -52,7 +52,7 @@ async def edit_post(
 ):
     await state.set_state(PostState.edit)
 
-    data = {
+    await state.update_data({
         "text": text,
         "caption": caption,
         "photo": photo,
@@ -73,9 +73,7 @@ async def edit_post(
         "back_callback_data": back_callback_data,
         "then_callback_data": then_callback_data,
         "allowed_methods": allowed_methods
-    }
-
-    await state.update_data({**data})
+    })
 
     await send_message(
         chat_id=chat_id,
