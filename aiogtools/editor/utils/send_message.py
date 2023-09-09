@@ -11,6 +11,8 @@ async def send_message(
 ):
     state_data = await state.get_data()
 
+    print(state_data)
+
     if state_data.get("text") is not None:
         message = await bot.send_message(
             chat_id=chat_id,
