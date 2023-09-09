@@ -30,6 +30,8 @@ async def edit_post(
         chat_id: int,
         state: FSMContext,
         bot: Bot,
+        back_callback_data: str,
+        then_callback_data: str,
         text: str | None = None,
         caption: str | None = None,
         photo: str | None = None,
@@ -44,6 +46,8 @@ async def edit_post(
         disable_web_page_preview: bool = False,
         disable_notification: bool = False,
         has_media_spoiler: bool = False,
+        back_title: str | None = None,
+        then_title: str | None = None,
         allowed_methods: list[AllowedMethods] | None = None
 ):
     await state.set_state(PostState.edit)
@@ -64,6 +68,10 @@ async def edit_post(
         "disable_notification": disable_notification,
         "has_media_spoiler": has_media_spoiler,
         "media_position": MediaPosition.UP,
+        "back_title": back_title,
+        "then_title": then_title,
+        "back_callback_data": back_callback_data,
+        "then_callback_data": then_callback_data,
         "allowed_methods": allowed_methods
     }
 
