@@ -2,7 +2,7 @@ from aiogram import Bot
 from aiogram.fsm.context import FSMContext
 
 from ..states import PostState
-from ..enums import AllowedMethods
+from ..enums import AllowedMethods, MediaPosition
 from ..utils.send_message import send_message
 from ..utils.send_panel import send_panel
 
@@ -36,11 +36,14 @@ async def edit_post(
         animation: str | None = None,
         video: str | None = None,
         video_note: str | None = None,
+        audio: str | None = None,
+        voice: str | None = None,
         document: str | None = None,
-        album: list | None = None,
-        has_media_spoiler: bool = False,
+        album: list[tuple[str, str]] | None = None,
+        markup: list[list[dict]] | None = None,
         disable_web_page_preview: bool = False,
         disable_notification: bool = False,
+        has_media_spoiler: bool = False,
         allowed_methods: list[AllowedMethods] | None = None
 ):
     await state.set_state(PostState.edit)
@@ -52,11 +55,15 @@ async def edit_post(
         "animation": animation,
         "video": video,
         "video_note": video_note,
+        "audio": audio,
+        "voice": voice,
         "document": document,
         "album": album,
-        "has_media_spoiler": has_media_spoiler,
+        "markup": markup,
         "disable_web_page_preview": disable_web_page_preview,
         "disable_notification": disable_notification,
+        "has_media_spoiler": has_media_spoiler,
+        "media_position": MediaPosition.UP,
         "allowed_methods": allowed_methods
     }
 
