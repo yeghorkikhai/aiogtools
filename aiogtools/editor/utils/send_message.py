@@ -12,12 +12,10 @@ async def send_message(
 ):
     state_data = await state.get_data()
 
-    print(state_data)
-
     if state_data.get("text") is not None:
         message = await bot.send_message(
             chat_id=chat_id,
-            text=state_data.get("text"),
+            text=f"""{ f'<a href="{state_data.get("media_url")}"> </a>' if state_data.get("media_url") is not None else "" }{state_data.get("text")}""",
             disable_notification=state_data.get("disable_notification"),
             disable_web_page_preview=state_data.get("disable_web_page_preview"),
             parse_mode=ParseMode.HTML

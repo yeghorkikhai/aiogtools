@@ -18,7 +18,7 @@ async def send_panel(
         reply_markup=panel_keyboard(
             is_album=False,
             has_markup=bool(state_data.get("markup")),
-            has_media=not (state_data.get("text")),
+            has_media=not (state_data.get("text")) or state_data.get("media_url"),
             media_position=state_data.get("media_position"),
             has_text=bool(state_data.get("text")) or bool(state_data.get("caption")),
             has_media_spoiler=state_data.get("has_media_spoiler"),

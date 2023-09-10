@@ -163,24 +163,6 @@ files = [
 frozenlist = ">=1.1.0"
 
 [[package]]
-name = "aiotools-editor"
-version = "0.0.2"
-description = ""
-optional = false
-python-versions = "^3.11"
-files = []
-develop = false
-
-[package.dependencies]
-aiogram = "^3.0.0"
-
-[package.source]
-type = "git"
-url = "https://github.com/yeghorkikhai/aiotools-editor.git"
-reference = "HEAD"
-resolved_reference = "bcc24fe2c540eca75bee91eaa55ffe465e6bc8c2"
-
-[[package]]
 name = "annotated-types"
 version = "0.5.0"
 description = "Reusable constraint types to use with typing.Annotated"
@@ -731,4 +713,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "94c30d906f09e36835ea30e7e563903dacdb21850ed04c00dcd26a1c4216df52"
+content-hash = "b7ac8be4137b4413ca3b59608fccea80680130e8314d484950b36c654e42dec3"

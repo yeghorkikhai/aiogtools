@@ -13,6 +13,7 @@ from ...cbdata import (
 
 def edit_media_keyboard(
         has_media: bool,
+        has_text: bool,
         position: MediaPosition
 ) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
@@ -32,7 +33,7 @@ def edit_media_keyboard(
             ).pack()
         )
     )
-    if has_media:
+    if has_media and has_text:
         builder.row(
             InlineKeyboardButton(
                 text=f"Видалити медіа",

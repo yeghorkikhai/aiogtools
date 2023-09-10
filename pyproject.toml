@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "aiogtools"
-version = "0.2.2"
+version = "0.3.0"
 description = "Aiotools kit for aiogram:^3.0.0 framework"
 authors = ["yeghorkikhai <yeghorkikhai@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+aiogram = "^3.0.0"
 
 
 [build-system]

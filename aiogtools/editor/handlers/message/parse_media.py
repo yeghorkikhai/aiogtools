@@ -6,10 +6,11 @@ from ...enums import MediaPosition
 from ...states import PostState
 from ...utils.send_message import send_message
 from ...utils.send_panel import send_panel
-from ...utils.media import update_media
+from ...utils.media import update_media, set_media
+from ...utils.telegraph import Telegraph
 
 
-async def photo(
+async def parse_media(
         message: Message,
         state: FSMContext,
         bot: Bot
@@ -18,23 +19,26 @@ async def photo(
     state_name = await state.get_state()
 
     if state_name == "PostState:message":
-        await state.update_data({
-            "photo": message.photo[-1].file_id,
-            "caption": message.html_text,
-            "markup": message.reply_markup.model_dump_json() if message.reply_markup else None,
-            "media_position": MediaPosition.UP,
-            "has_media_spoiler": message.has_media_spoiler
-        })
-    elif state == "PostState:edit_media":
+        await set_media(state, message)
+    elif state_name == "PostState:edit_media" or state_name == "PostState:edit":
         state_data = await state.get_data()
+        file_id = message.photo[-1].file_id
 
         if state_data.get("media_position") == MediaPosition.UP:
             await update_media(
                 state=state,
-                photo=message.photo[-1].file_id
+                photo=file_id,
             )
+            await state.update_data({
+                "caption": state_data.get("text"),
+                "text": None
+            })
         elif state_data.get("media_position") == MediaPosition.DOWN:
-            pass
+            telegraph = Telegraph(bot=bot)
+            media_url = await telegraph.upload_file_from_telegram(file_id=file_id)
+            await state.update_data({
+                "media_url": media_url
+            })
 
     await send_message(
         chat_id=chat_id,

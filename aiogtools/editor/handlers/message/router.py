@@ -3,13 +3,7 @@ from aiogram.filters import StateFilter
 
 # Handlers
 from .text import text
-from .photo import photo
-from .animation import animation
-from .video import video
-from .video_note import video_note
-from .audio import audio
-from .voice import voice
-from .document import document
+from .parse_media import parse_media
 from .sticker import sticker
 from .poll import poll
 from .album import get_album
@@ -27,43 +21,13 @@ router.message.register(
     StateFilter(PostState.message, PostState.edit_text)
 )
 router.message.register(
-    photo,
-    F.photo,
+    parse_media,
     ~F.media_group_id,
-    StateFilter(PostState.message)
+    StateFilter(PostState.message, PostState.edit_media, PostState.edit)
 )
 router.message.register(
-    animation,
-    F.animation,
-    ~F.media_group_id,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    video,
-    F.video,
-    ~F.media_group_id,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    video_note,
-    F.video_note,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    audio,
-    F.audio,
-    ~F.media_group_id,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    voice,
-    F.voice,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    document,
-    F.document,
-    ~F.media_group_id,
+    get_album,
+    F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(
@@ -74,11 +38,6 @@ router.message.register(
 router.message.register(
     poll,
     F.poll,
-    StateFilter(PostState.message)
-)
-router.message.register(
-    get_album,
-    F.media_group_id,
     StateFilter(PostState.message)
 )
 router.message.register(

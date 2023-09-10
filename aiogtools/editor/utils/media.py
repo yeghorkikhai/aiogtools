@@ -1,6 +1,6 @@
+from aiogram import Bot
 from aiogram.types import (
     Message,
-    InputMedia,
     InputMediaPhoto,
     InputMediaAnimation,
     InputMediaVideo,
@@ -10,6 +10,7 @@ from aiogram.types import (
 from aiogram.fsm.context import FSMContext
 
 from ..enums import MediaPosition
+from .telegraph import Telegraph
 
 
 async def set_media(
@@ -134,3 +135,40 @@ async def build_media(
                 pass
 
     return media
+
+
+async def switch_media_position(
+        state: FSMContext,
+        bot: Bot,
+        media_position: MediaPosition
+) -> int | None:
+    state_data = await state.get_data()
+
+    if media_position == MediaPosition.UP:
+        if state_data.get("media_url") is not None:
+            await state.update_data({
+                "photo": state_data.get("media_url"),
+                "caption": state_data.get("text"),
+                "text": None,
+                "media_url": None
+            })
+            return -1
+
+    elif media_position == MediaPosition.DOWN:
+        if (photo := state_data.get("photo")) is not None:
+            telegraph = Telegraph(bot=bot)
+            if photo.startswith("https://"):
+                media_url = photo
+            else:
+                media_url = await telegraph.upload_file_from_telegram(
+                    file_id=state_data.get("photo")
+                )
+            await state.update_data({
+                "text": state_data.get("caption"),
+                "media_url": media_url,
+                "photo": None,
+                "caption": None
+            })
+            return -1
+
+    return

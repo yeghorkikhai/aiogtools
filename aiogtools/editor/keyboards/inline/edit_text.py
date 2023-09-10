@@ -8,10 +8,11 @@ from ...cbdata import BaseCallbackData
 
 
 def edit_text_keyboard(
-        has_text: bool
+        has_text: bool,
+        has_media: bool
 ) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
-    if has_text:
+    if has_text and has_media:
         builder.row(
             InlineKeyboardButton(
                 text=f"Видалити текст",
